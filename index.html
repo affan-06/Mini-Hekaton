@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect |Social Media App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-users"></i>
+                <span>SocialConnect</span>
+            </div>
+            <div class="user-info">
+                <span id="welcome-user">Welcome, User</span>
+                <div class="user-avatar" id="user-avatar">U</div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-outline btn-small" id="logout-btn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Authentication Section -->
+    <section id="auth-section" class="auth-container">
+        <div class="auth-form">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="login-tab">Login</div>
+                <div class="auth-tab" id="signup-tab">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            
+            <!-- Signup Form -->
+            <form id="signup-form" class="hidden">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Main Content (Hidden until login) -->
+    <section id="main-section" class="container hidden">
+        <div class="main-content">
+            <!-- Dashboard -->
+            <div class="dashboard" id="dashboard">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-posts">0</h3>
+                            <p>Total Posts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-likes">0</h3>
+                            <p>Total Likes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="user-posts">0</h3>
+                            <p>Your Posts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Sort -->
+            <div class="search-sort-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" class="form-control" placeholder="Search posts...">
+                </div>
+                <div class="sort-options">
+                    <select id="sort-select" class="form-control">
+                        <option value="latest">Latest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="most-liked">Most Liked</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Create Post -->
+            <div class="create-post">
+                <input type="text" id="post-title" class="form-control" placeholder="Post title (optional)">
+                <textarea id="post-text" placeholder="What's on your mind?"></textarea>
+                <div class="create-post-actions">
+                    <div class="emoji-picker">
+                        <button type="button" class="emoji-btn" data-emoji="😊">😊</button>
+                        <button type="button" class="emoji-btn" data-emoji="😂">😂</button>
+                        <button type="button" class="emoji-btn" data-emoji="❤️">❤️</button>
+                        <button type="button" class="emoji-btn" data-emoji="👍">👍</button>
+                        <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+                    </div>
+                    <input type="text" id="image-url" class="form-control image-url-input" placeholder="Paste image URL (optional)">
+                    <button id="create-post-btn" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Post
+                    </button>
+                </div>
+            </div>
+
+            <!-- Posts Feed -->
+            <div class="posts-feed" id="posts-feed">
+                <!-- Posts will be dynamically added here -->
+                <div class="no-posts">
+                    <i class="far fa-comment-dots"></i>
+                    <h3>No posts yet</h3>
+                    <p>Be the first to share something!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Post</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-delete">Cancel</button>
+                <button class="btn btn-danger" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Post</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <input type="text" id="edit-post-title" class="form-control" placeholder="Post title">
+            <textarea id="edit-post-text" class="form-control" rows="5" placeholder="Post content"></textarea>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-edit">Cancel</button>
+                <button class="btn btn-primary" id="save-edit">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
